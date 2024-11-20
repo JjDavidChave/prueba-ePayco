@@ -6,7 +6,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export const config: DataSourceOptions = {
   type: 'postgres',
-  database: process.env.DB_NAME || 'prueba_tecnica_control',
+  database: process.env.DB_NAME || 'proof_epayco',
   port: +process.env.DB_PORT || 5432,
   host: process.env.DB_HOST || 'localhost',
   username: process.env.DB_USERNAME || 'postgres',

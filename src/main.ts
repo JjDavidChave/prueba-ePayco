@@ -29,7 +29,7 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   const config = new DocumentBuilder()
-    .setTitle('Proof_Control')
+    .setTitle('Proof_ePayco')
     .setDescription('API doc')
     .setVersion('1.0')
     .build();

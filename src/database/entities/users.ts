@@ -1,16 +1,20 @@
-import { RoleSelect } from 'src/global/general.enum';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Wallet } from './wallet';
 
-@Entity()
+@Entity('users')
 export class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  username: string;
-
-  @Column()
-  password: string;
+  document: string;
 
   @Column()
   email: string;
@@ -18,23 +22,17 @@ export class Users {
   @Column()
   name: string;
 
-  @Column()
-  status: boolean;
-
-  @Column()
+  @Column({ type: 'bigint' })
   phoneNumber: number;
-
-  @Column({
-    type: 'enum',
-    enum: RoleSelect,
-  })
-  RoleSelect: RoleSelect;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Wallet, (wallet) => wallet.user)
+  wallet: Wallet[];
 
   constructor(data: Partial<Users>) {
     Object.assign(this, data);

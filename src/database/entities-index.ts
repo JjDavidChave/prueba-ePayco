@@ -1,4 +1,3 @@
-
+export * from './entities/transaction'
 export * from './entities/users'
-export * from './entities/auth'
-export * from './entities/role'
+export * from './entities/wallet'

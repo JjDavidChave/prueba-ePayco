@@ -9,22 +9,22 @@ services:
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    container_name: prueba_tecnica_db
+    container_name: prueba_tecnica_epayco
     volumes:
-      - trecesoftware:/var/lib/postgresql/data
+      - proof_epayco:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin_prueba_tecnica
+    container_name: pgadmin_prueba_epayco
     restart: always
     ports:
       - "5050:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: prueba_tecnica@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: passdatabasepaulo
+      PGADMIN_DEFAULT_EMAIL: prueba_epayco@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 123456789epayco
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 
 volumes:
-  trecesoftware:
+  proof_epayco:
   pgadmin-data:

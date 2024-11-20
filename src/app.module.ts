@@ -4,8 +4,8 @@ import { APP_GUARD } from '@nestjs/core';
 import {config} from './config/database/typeorm.config'
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TreceControl } from './modules/proof_control/proof_contol.module';
-import { AuthModule } from './modules/auth/auth.module';
+import { ProofControl } from './modules/proof_contol.module';
+import { SoapModule } from './soap/soap.module';
 
 
 @Module({
@@ -25,8 +25,8 @@ import { AuthModule } from './modules/auth/auth.module';
         return { ...config };
       },
     }),
-    AuthModule,
-    TreceControl
+    ProofControl,
+    SoapModule
   ],
   controllers: [],
   providers: [

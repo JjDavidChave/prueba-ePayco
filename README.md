@@ -3,43 +3,105 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-## Proceso para ejecutar el proyecto en NestJS
 
-1. **Instalar Dependencias**
-   ```bash
-   npm install
-   ```
-   Esto instalará todas las dependencias necesarias para ejecutar el proyecto.
+# Proyecto NestJS - ePayco Virtual Wallet
 
-2. **Configuración del Entorno con Docker**
-   El proyecto utiliza Docker para crear y gestionar un contenedor con pgAdmin y una base de datos PostgreSQL.
+Este proyecto es una simulación de una billetera virtual para ePayco, que incluye servicios REST y SOAP. La aplicación permite el registro de usuarios, recargas de billetera, pagos con código de confirmación y consulta de saldo.
 
-   - **Comando para levantar Docker:**
-     ```bash
-     docker-compose up -d
-     ```
-   
-   - **Credenciales para pgAdmin:**
-     - **Correo**: `prueba_tecnica@gmail.com`
-     - **Contraseña**: `passdatabasepaulo`
-   
-   Una vez levantado Docker, accede a pgAdmin para crear una conexión usando la configuración de los archivos `.env` y `docker-compose.yml`.
+## Requisitos
 
-3. **Crear la Base de Datos**
-   En pgAdmin, crea una nueva base de datos con el nombre especificado en la configuración de TypeORM:
-   
-   - **Nombre de la base de datos**: `prueba_tecnica_control`
+- Node.js (versión 14 o superior)
+- Docker
+- Docker Compose
 
-4. **Ejecutar Migraciones**
-   Con la conexión y base de datos creadas, ejecuta el siguiente comando para aplicar las migraciones y crear las tablas en PostgreSQL:
-   
-   ```bash
-   npm run migration:run
-   ```
+## Instalación
 
-5. **Iniciar el Proyecto en Modo Desarrollo**
-   Finalmente, para ejecutar el proyecto en modo de desarrollo, utiliza el siguiente comando:
-   
-   ```bash
-   npm run start:dev
-   ```
+1. Clona el repositorio:
+
+```bash
+Instala las dependencias:
+npm install
+Levanta los servicios con Docker Compose:
+bash
+Copiar código
+docker-compose up -d
+Configuración de la Base de Datos
+Accede a pgAdmin (por defecto en http://localhost:5050) y usa las siguientes credenciales de ejemplo:
+
+Correo electrónico: admin@admin.com
+Contraseña: admin
+Conéctate al servidor PostgreSQL usando las siguientes credenciales (definidas en docker-compose.yml):
+
+Host: db
+Port: 5432
+Username: postgres
+Password: postgres
+Crea la base de datos proof_epayco desde pgAdmin.
+
+Migraciones
+Para crear y ejecutar migraciones:
+
+Crea una nueva migración:
+bash
+Copiar código
+npm run migration:create src/database/migrations/nombre_tabla
+Sube las migraciones a la base de datos:
+bash
+Copiar código
+npm run migration:run
+Ejecutar el Proyecto
+Para iniciar el proyecto:
+
+bash
+Copiar código
+npm run start:dev
+Pruebas de la API REST y SOAP
+Pruebas REST
+Puedes utilizar Postman o cualquier otra herramienta similar para probar los endpoints REST. Aquí tienes algunos ejemplos de solicitudes:
+
+ENDPOINTS REST
+
+localhost:3000/api/users_control
+localhost:3000/api/wallet
+localhost:3000/api/transaction
+
+Registro de usuario:
+bash
+Copiar código
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "document": "104222222",
+  "email": "admin@admin.com",
+  "name": "prueba tres",
+  "phoneNumber": 321115560
+}
+Recarga de billetera:
+bash
+Copiar código
+POST http://localhost:3000/api/wallet/recharge
+Content-Type: application/json
+
+{
+  "id": "someUserId",
+  "amount": 1000
+}
+Pruebas SOAP
+Para probar los servicios SOAP, puedes usar SoapUI o Postman. Aquí tienes un ejemplo de solicitud SOAP:
+
+xml
+Copiar código
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:web="http://localhost:3000/wsdl/UserService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:registerUser>
+         <document>104222222</document>
+         <email>admin@admin.com</email>
+         <name>prueba tres</name>
+         <phoneNumber>321115560</phoneNumber>
+      </web:registerUser>
+   </soapenv:Body>
+</soapenv:Envelope>
+Para enviar esta solicitud, configura una petición POST en Postman a la URL http://localhost:3000/api/soap/registerUser con el cuerpo en formato XML.

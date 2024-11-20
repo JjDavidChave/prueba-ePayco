@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="UserService"
+             targetNamespace="http://localhost:3000/api/soap/user"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://localhost:3000/api/soap/user"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <message name="registerUserRequest">
+    <part name="document" type="xsd:string"/>
+    <part name="email" type="xsd:string"/>
+    <part name="name" type="xsd:string"/>
+    <part name="phoneNumber" type="xsd:string"/>
+  </message>
+
+  <message name="registerUserResponse">
+    <part name="result" type="xsd:string"/>
+  </message>
+
+  <message name="rechargeWalletRequest">
+    <part name="id" type="xsd:string"/>
+    <part name="amount" type="xsd:decimal"/>
+  </message>
+
+  <message name="rechargeWalletResponse">
+    <part name="result" type="xsd:string"/>
+  </message>
+
+  <message name="payRequest">
+    <part name="type" type="xsd:string"/>
+    <part name="amount" type="xsd:decimal"/>
+    <part name="walletId" type="xsd:string"/>
+  </message>
+
+  <message name="payResponse">
+    <part name="sessionId" type="xsd:string"/>
+    <part name="result" type="xsd:string"/>
+  </message>
+
+  <message name="confirmPaymentRequest">
+    <part name="sessionId" type="xsd:string"/>
+    <part name="token" type="xsd:string"/>
+  </message>
+
+  <message name="confirmPaymentResponse">
+    <part name="result" type="xsd:string"/>
+  </message>
+
+  <message name="checkBalanceRequest">
+    <part name="document" type="xsd:string"/>
+    <part name="phoneNumber" type="xsd:string"/>
+  </message>
+
+  <message name="checkBalanceResponse">
+    <part name="balance" type="xsd:decimal"/>
+  </message>
+
+  <portType name="UserServicePortType">
+    <operation name="registerUser">
+      <input message="tns:registerUserRequest"/>
+      <output message="tns:registerUserResponse"/>
+    </operation>
+    <operation name="rechargeWallet">
+      <input message="tns:rechargeWalletRequest"/>
+      <output message="tns:rechargeWalletResponse"/>
+    </operation>
+    <operation name="pay">
+      <input message="tns:payRequest"/>
+      <output message="tns:payResponse"/>
+    </operation>
+    <operation name="confirmPayment">
+      <input message="tns:confirmPaymentRequest"/>
+      <output message="tns:confirmPaymentResponse"/>
+    </operation>
+    <operation name="checkBalance">
+      <input message="tns:checkBalanceRequest"/>
+      <output message="tns:checkBalanceResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="UserServiceBinding" type="tns:UserServicePortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="registerUser">
+      <soap:operation soapAction="registerUser"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="rechargeWallet">
+      <soap:operation soapAction="rechargeWallet"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="pay">
+      <soap:operation soapAction="pay"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="confirmPayment">
+      <soap:operation soapAction="confirmPayment"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="checkBalance">
+      <soap:operation soapAction="checkBalance"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="UserService">
+    <documentation>WSDL File for UserService</documentation>
+    <port name="UserServicePort" binding="tns:UserServiceBinding">
+      <soap:address location="http://localhost:3000/api/soap/user"/>
+    </port>
+  </service>
+
+</definitions>

@@ -19,7 +19,7 @@ export class UsersService {
       const cleven01 = await this.usersRepository.save(createUserDto);
       return cleven01;
     } catch (error) {
-      console.log('Data is not save MallQuinta01', error);
+      console.log('Data is not save Users', error);
       throw error;
     }
   }

@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Role } from 'src/database/entities/role';
+import { Transaction } from 'src/database/entities/transaction';
 import { paginate } from 'src/lib/paginate/paginate.service';
 import { PaginateDto } from 'src/lib/paginate/paginate.type';
 import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
-export class RoleRepository extends Repository<Role> {
+export class TransactionRepository extends Repository<Transaction> {
   constructor(private dataSource: DataSource) {
-    super(Role, dataSource.createEntityManager());
+    super(Transaction, dataSource.createEntityManager());
   }
   async list(paginateDto: PaginateDto) {
-    return await paginate<Role>(this, paginateDto);
+    return await paginate<Transaction>(this, paginateDto);
   }
 }
